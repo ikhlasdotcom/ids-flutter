@@ -50,9 +50,54 @@ Story idsCarouselStory() {
         ),
         items: List.generate(10, (index) {
           return IdsCarouselModel(
-            title: "Title Item ${index + 1}",
-            description: "Description Item ${index + 1}",
-            image: "https://picsum.photos/200/200",
+            titleWidget: Text(
+              "Title Item ${index + 1}",
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
+            descriptionWidget: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Description Item ${index + 1}",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: const Color(0xff4C4C50)),
+                ),
+                const SizedBox(height: 16),
+                for (final itemHighlight
+                    in "USP Item ${index + 1}.1\nUSP Item ${index + 1}.2"
+                        .split('\n'))
+                  if (itemHighlight.isNotEmpty)
+                    Container(
+                      margin: const EdgeInsets.only(
+                        // left: Dimens.space16,
+                        right: 16,
+                        bottom: 8,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.check_circle,
+                            color: Color(0xff4C4C50),
+                            size: 16,
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              itemHighlight,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+              ],
+            ),
+            imageUrl: "https://picsum.photos/200/200",
             badgeWidget: IdsBadge(
               label: "Badge ${index + 1}",
               backgroundColor: context.knobs.options(
@@ -67,7 +112,7 @@ Story idsCarouselStory() {
                 options: Helper().colorOption(),
               )),
             ),
-            priceWidget: Text("Footer Item ${index + 1}"),
+            footerWidget: Text("Footer Item ${index + 1}"),
             onTap: (a) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

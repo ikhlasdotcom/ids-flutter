@@ -12,6 +12,7 @@ class IdsBadge extends StatelessWidget {
       horizontal: 10,
       vertical: 2,
     ),
+    this.maxLines = 1,
   });
 
   final String label;
@@ -20,6 +21,7 @@ class IdsBadge extends StatelessWidget {
   final double radius;
   final EdgeInsets margin;
   final EdgeInsets padding;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,8 @@ class IdsBadge extends StatelessWidget {
       ),
       child: Text(
         label,
+        maxLines: maxLines,
+        overflow: TextOverflow.ellipsis,
         style: labelTextStyle,
       ),
     );

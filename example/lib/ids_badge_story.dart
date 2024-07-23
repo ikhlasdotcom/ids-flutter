@@ -11,7 +11,12 @@ Story idsBadgeStory() {
       body: Center(
         child: IdsBadge(
           label: context.knobs.text(label: 'Label', initial: 'IDS Badge'),
-          // backgroundColor: Colors.red,
+          maxLines: context.knobs.sliderInt(
+            label: 'Max Lines',
+            initial: 1,
+            min: 1,
+            max: 5,
+          ),
           backgroundColor: context.knobs.options(
             label: 'Background Color',
             initial: Colors.grey,
@@ -40,24 +45,6 @@ Story idsBadgeStory() {
                 max: 100,
               )
               .toDouble(),
-          margin: EdgeInsets.symmetric(
-            horizontal: context.knobs
-                .sliderInt(
-                  label: "Margin Horizontal",
-                  initial: 10,
-                  min: 0,
-                  max: 50,
-                )
-                .toDouble(),
-            vertical: context.knobs
-                .sliderInt(
-                  label: "Margin Vertical",
-                  initial: 2,
-                  min: 0,
-                  max: 50,
-                )
-                .toDouble(),
-          ),
           padding: EdgeInsets.symmetric(
             horizontal: context.knobs
                 .sliderInt(

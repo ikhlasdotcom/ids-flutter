@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 
 class IdsCarouselModel {
-  final String image;
-  final String title;
-  final String? description;
-  final String? usp;
-  final String? placeholderImage;
+  final String imageUrl;
+  final String? placeholderImageUrl;
+  final Widget titleWidget;
+  final Widget? descriptionWidget;
   final bool disable;
   final Widget? badgeWidget;
-  final Widget? priceWidget;
+  final Widget? footerWidget;
   final Function(IdsCarouselModel) onTap;
 
   IdsCarouselModel({
-    required this.image,
-    required this.title,
-    this.description,
-    this.usp,
-    this.placeholderImage,
+    required this.imageUrl,
+    required this.titleWidget,
+    this.descriptionWidget,
+    this.placeholderImageUrl,
     this.disable = false,
     this.badgeWidget,
-    this.priceWidget,
+    this.footerWidget,
     required this.onTap,
   });
 }
