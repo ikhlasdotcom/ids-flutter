@@ -22,7 +22,7 @@ class IdsPrice extends StatelessWidget {
       TextSpan(
         children: <InlineSpan>[
           TextSpan(
-            text: '$priceLabel ',
+            text: '$priceLabel\n',
             style: labelTextStyle ??
                 Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Colors.grey[600],

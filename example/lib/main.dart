@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ],
-        initialStory: 'Widgets/IdsBadge',
+        initialStory: 'Widgets/IdsCarousel',
         stories: [
           idsBadgeStory(),
           idsPriceStory(),

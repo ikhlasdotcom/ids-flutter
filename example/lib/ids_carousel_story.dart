@@ -17,6 +17,14 @@ Story idsCarouselStory() {
           min: 1,
           max: 5,
         ),
+        carouselSpace: context.knobs
+            .sliderInt(
+              label: "Carousel Spacing",
+              initial: 10,
+              min: 0,
+              max: 50,
+            )
+            .toDouble(),
         onTitleTap:
             context.knobs.boolean(label: 'Enable Title Click', initial: true)
                 ? () {
@@ -28,6 +36,24 @@ Story idsCarouselStory() {
                   }
                 : null,
         title: context.knobs.text(label: 'Title', initial: "Carousel Title"),
+        titlePadding: EdgeInsets.symmetric(
+          horizontal: context.knobs
+              .sliderInt(
+                label: "Title Padding Horizontal",
+                initial: 20,
+                min: 0,
+                max: 50,
+              )
+              .toDouble(),
+          vertical: context.knobs
+              .sliderInt(
+                label: "Title Padding Vertical",
+                initial: 0,
+                min: 0,
+                max: 50,
+              )
+              .toDouble(),
+        ),
         description: context.knobs.text(
             label: 'Description', initial: "This is Carousel Description"),
         margin: EdgeInsets.symmetric(

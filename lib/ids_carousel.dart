@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ids_flutter/expendable_page_view.dart';
 
 import 'ids.dart';
+import 'ids_carousel_item.dart';
+import 'widget/expendable_page_view.dart';
 
 class IdsCarousel extends StatelessWidget {
   const IdsCarousel({
@@ -11,6 +12,8 @@ class IdsCarousel extends StatelessWidget {
     required this.items,
     this.onTitleTap,
     this.margin,
+    this.titlePadding,
+    this.carouselSpace,
     this.itemsPerPage = 2,
   });
 
@@ -18,79 +21,76 @@ class IdsCarousel extends StatelessWidget {
   final String description;
   final List<IdsCarouselModel> items;
   final EdgeInsets? margin;
+  final EdgeInsets? titlePadding;
+  final double? carouselSpace;
   final VoidCallback? onTitleTap;
   final int itemsPerPage;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: ValueKey(itemsPerPage), // Use a unique key based on itemsPerPage
+      key: ValueKey(itemsPerPage),
       margin: margin ?? EdgeInsets.zero,
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Material(
-              color: Colors.transparent,
+          Material(
+            color: Colors.transparent,
+            child: Padding(
+              padding: titlePadding ?? const EdgeInsets.all(0),
               child: InkWell(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
                 onTap: onTitleTap,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: title,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displaySmall,
-                                  ),
-                                  if (onTitleTap != null) ...[
-                                    const WidgetSpan(child: SizedBox(width: 6)),
-                                    WidgetSpan(
-                                      child: CircleAvatar(
-                                        radius: 12,
-                                        backgroundColor: Colors.grey[200],
-                                        child: const Icon(
-                                          Icons.chevron_right,
-                                          size: 15,
-                                          color: Colors.black,
-                                        ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: title,
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
+                                ),
+                                if (onTitleTap != null) ...[
+                                  const WidgetSpan(child: SizedBox(width: 6)),
+                                  WidgetSpan(
+                                    child: CircleAvatar(
+                                      radius: 12,
+                                      backgroundColor: Colors.grey[200],
+                                      child: const Icon(
+                                        Icons.chevron_right,
+                                        size: 15,
+                                        color: Colors.black,
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ],
-                              ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     if (description.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: Text(
-                          description,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge
-                              ?.copyWith(color: Colors.grey[600]),
-                        ),
+                      Text(
+                        description,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(color: Colors.grey[600]),
                       ),
                   ],
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 16),
           ExpandablePageView(
             controller: PageController(
               viewportFraction: (1 / itemsPerPage) - 0.05,
@@ -104,9 +104,12 @@ class IdsCarousel extends StatelessWidget {
                   Material(
                     color: Colors.transparent,
                     child: InkWell(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
                       onTap: () => item.onTap(item),
                       child: Container(
-                        padding: const EdgeInsets.only(left: 20),
+                        padding: EdgeInsets.only(left: carouselSpace ?? 0),
                         child: IdsCarouselItem(
                           image: item.imageUrl,
                           placeholderImage: item.placeholderImageUrl,
@@ -121,14 +124,9 @@ class IdsCarousel extends StatelessWidget {
                   ),
                 );
               }).values,
-
-              /// Add empty container to make sure the last item padding is
-              /// shown because of we are using viewportFraction and we cannot
-              /// adjust padding normally without compromise the item size
-              ///
-              if (itemsPerPage > 1) ...[
+              if (items.length > 1) ...[
                 const SizedBox.shrink(),
-              ],
+              ]
             ],
           ),
         ],

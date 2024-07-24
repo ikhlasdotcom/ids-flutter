@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ids_flutter/size_reporting_widet.dart';
+import 'package:ids_flutter/widget/size_reporting_widet.dart';
 
 class ExpandablePageView extends StatefulWidget {
   final List<Widget> children;

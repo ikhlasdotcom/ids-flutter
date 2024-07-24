@@ -2,8 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-import 'ids.dart';
-
 class IdsCarouselItem extends StatefulWidget {
   const IdsCarouselItem({
     super.key,
@@ -33,12 +31,36 @@ class _IdsCarouselItemState extends State<IdsCarouselItem> {
 
   @override
   Widget build(BuildContext context) {
-    return IdsCard(
-      title: widget.titleWidget,
-      description: widget.descriptionWidget,
-      image: _getImageWidget(),
-      label: widget.badgeWidget,
-      footer: widget.footerWidget,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// Only visible if Image Available
+          Stack(
+            children: [
+              _getImageWidget(),
+              if (widget.badgeWidget != null) widget.badgeWidget!,
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 10),
+              widget.titleWidget,
+              if (widget.descriptionWidget != null) ...[
+                const SizedBox(height: 4),
+                widget.descriptionWidget!,
+              ],
+            ],
+          ),
+          const SizedBox(height: 4),
+          widget.footerWidget ?? const SizedBox.shrink(),
+        ],
+      ),
     );
   }
 
@@ -53,7 +75,7 @@ class _IdsCarouselItemState extends State<IdsCarouselItem> {
         }
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(12),
         child: AspectRatio(
           aspectRatio: 1,
           child: CachedNetworkImage(
