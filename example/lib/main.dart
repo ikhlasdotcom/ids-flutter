@@ -5,6 +5,7 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 import 'helper.dart';
 
 part 'ids_badge_story.dart';
+part 'ids_carousel_loading_story.dart';
 part 'ids_carousel_story.dart';
 part 'ids_price_story.dart';
 
@@ -42,6 +43,7 @@ class _MyAppState extends State<MyApp> {
           idsBadgeStory(),
           idsPriceStory(),
           idsCarouselStory(),
+          idsCarouselLoadingStory(),
         ],
       );
 }

@@ -9,6 +9,7 @@ class IdsCarouselModel {
   final Widget? badgeWidget;
   final Widget? footerWidget;
   final Function(IdsCarouselModel) onTap;
+  final BoxFit? imageBoxFit;
 
   IdsCarouselModel({
     required this.imageUrl,
@@ -18,6 +19,7 @@ class IdsCarouselModel {
     this.disable = false,
     this.badgeWidget,
     this.footerWidget,
+    this.imageBoxFit,
     required this.onTap,
   });
 }
