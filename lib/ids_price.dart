@@ -8,6 +8,7 @@ class IdsPrice extends StatelessWidget {
     required this.priceCurrency,
     required this.priceAmount,
     this.priceTextStyle,
+    this.isLabelBottom = false,
   });
 
   final String priceLabel;
@@ -15,19 +16,22 @@ class IdsPrice extends StatelessWidget {
   final String priceCurrency;
   final String priceAmount;
   final TextStyle? priceTextStyle;
+  final bool isLabelBottom;
 
   @override
   Widget build(BuildContext context) {
     return Text.rich(
       TextSpan(
         children: <InlineSpan>[
-          TextSpan(
-            text: '$priceLabel\n',
-            style: labelTextStyle ??
-                Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.grey[600],
-                    ),
-          ),
+          if (!isLabelBottom) ...[
+            TextSpan(
+              text: '$priceLabel\n',
+              style: labelTextStyle ??
+                  Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Colors.grey[600],
+                      ),
+            ),
+          ],
           WidgetSpan(
             alignment: PlaceholderAlignment.middle,
             child: Text(
@@ -35,6 +39,15 @@ class IdsPrice extends StatelessWidget {
               style: priceTextStyle ?? Theme.of(context).textTheme.titleLarge,
             ),
           ),
+          if (isLabelBottom) ...[
+            TextSpan(
+              text: '\n$priceLabel',
+              style: labelTextStyle ??
+                  Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Colors.grey[600],
+                      ),
+            ),
+          ],
         ],
       ),
     );

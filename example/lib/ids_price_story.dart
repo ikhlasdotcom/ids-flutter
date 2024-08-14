@@ -6,6 +6,8 @@ Story idsPriceStory() {
     description:
         'IDs Price is a widget to show a price with currency and label',
     builder: (context) => IdsPrice(
+      isLabelBottom:
+          context.knobs.boolean(label: 'Label Bottom', initial: false),
       priceLabel: context.knobs.text(label: 'Price Label', initial: 'From'),
       labelTextStyle: TextStyle(
         color: context.knobs.options(
