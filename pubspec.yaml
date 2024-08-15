@@ -16,6 +16,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   expandable_page_view: ^1.0.17
   shimmer: ^3.0.0
+  uuid: ^4.4.2
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import 'ids_shimmer.dart';
@@ -48,6 +49,11 @@ class _IdsCarouselItemState extends State<IdsCarouselItem> {
   bool isVisible = false;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -93,7 +99,7 @@ class _IdsCarouselItemState extends State<IdsCarouselItem> {
 
   Widget _getImageWidget() {
     return VisibilityDetector(
-      key: Key(widget.image),
+      key: Key(const Uuid().v4()),
       onVisibilityChanged: (info) {
         if (info.visibleFraction >= 0.9) {
           setState(() {
@@ -104,7 +110,7 @@ class _IdsCarouselItemState extends State<IdsCarouselItem> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: Container(
-          color: Color(0xffF8F8F8),
+          color: const Color(0xffF8F8F8),
           padding:
               widget.imageBoxFit != BoxFit.cover && widget.imageBoxFit != null
                   ? const EdgeInsets.all(16)
